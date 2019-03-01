@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  	<head>
+  
+  		<!--Set Encoding -->
+    	<meta charset="UTF-8">
+
+    	<!--Set Tab Descriptive Name -->
+    	<title>Phase 1 Final</title> 
+  
+  	</head>
+  	
+  	<body>
+  		
+  		<!-- Heding 1 Title -->		
+  		<h1> IOT ON/OFF Control</h1>
+  		<!-- Division for buttons grouping so that hey toggle each other if one is selcted -->
+  		<div>
+
+  			<!-- Heading 2 Status -->
+  			<h2>Button Status:</h2>
+
+  			<!--  2 Radio Buttons for control On / Off  -->
+  			<input id="Button_On" type="radio" name="status"  > <strong> ON </strong> <br>
+  			<input id="Button_Off" type="radio" name="status" > <strong> OFF</strong> <br> 
+
+  		</div>
+  		
+  		<!-- Instantly Updated Button Status -->
+  		<p1> The Button is : </p>  
+  			<p2 class="StringStatus" id="String2"></p>
+  		
+  		<!-- Last Status before the page was refreshed -->
+  		<p3> Last Status before Reresh :</p>
+			<p4 class="StringStatus" id="String3"></p>
+		
+		<!--JavaScript type -->
+  		<script type="text/javascript">
+  			
+  			/* Wait until the entire document has finished loading */
+  			document.addEventListener('DOMContentLoaded',function()
+    		{
+    			/* Stores the status of stored localstorage.ButtonStatus if exists and display it in p4 */
+    			document.getElementById("String3").innerHTML=localStorage.getItem("ButtonStatus");
+    			
+    			/* Check if there is any elements inside the localstorage */
+    			if( window.localStorage.length == 0 )
+    			{	
+    				/*If Empty Display Not checked in p4*/
+    				document.getElementById("String2").innerHTML="Not Checked";
+    			}
+    			else 
+    			{	
+    				/* Display last found value */
+    				document.getElementById("String2").innerHTML=localStorage.getItem("ButtonStatus");
+    				
+    				/* Checks Radio Button depending if it was On or Off*/
+    				if(localStorage.getItem("ButtonStatus") == "ON")
+    				{
+    					document.getElementById("Button_On").checked=true;
+    				}
+    				else
+    				{
+    					document.getElementById("Button_Off").checked=true;
+    				}
+    			}
+    			/* If Radio button ON is selected update p3 and store value in local Storage */
+    			document.getElementById("Button_On").onclick=function()
+    			{
+    				document.getElementById("String2").innerHTML="ON";
+    				localStorage.setItem("ButtonStatus","ON");
+    			};
+    			/* If Radio button OFF is selected update p3 and store value in local Storage */
+    			document.getElementById("Button_Off").onclick=function()
+    			{
+    				document.getElementById("String2").innerHTML="OFF";
+    				localStorage.setItem("ButtonStatus","OFF");
+    			};
+			});
+		</script>
+    </body>
+</html>
+
